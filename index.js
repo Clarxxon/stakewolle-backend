@@ -21,11 +21,11 @@ app.use('/api', router)
 
 const start = async () => {
 		try {
-				await sequelize.authenticate()
-				await sequelize.sync()
+				// await sequelize.authenticate()
+				// await sequelize.sync()
 				console.log('started')
 
-				//app.listen(port, () => console.log(`Started on ${port} port`))
+				app.listen(port, () => console.log(`Started on ${port} port`))
 		}catch(e) {
 				console.log(e)
 		}
