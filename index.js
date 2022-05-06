@@ -6,8 +6,7 @@ const sequelize = require('./db')
 const models = require('./models/models')
 const router = require('./routes/index')
 const fileUpload = require('express-fileupload')
-const port = process.env.PORT || 5000
-const host = '0.0.0.0';
+const port = process.env.DEV_PORT || 8000
 const path = require('path')
 
 const app = express()
@@ -24,8 +23,9 @@ const start = async () => {
 		try {
 				await sequelize.authenticate()
 				await sequelize.sync()
+				console.log('started')
 
-				app.listen(port, host, () => console.log(`Started on ${port} port`))
+				app.listen(port, () => console.log(`Started on ${port} port`))
 		}catch(e) {
 				console.log(e)
 		}
