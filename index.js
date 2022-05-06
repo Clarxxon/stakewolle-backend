@@ -6,7 +6,7 @@ const sequelize = require('./db')
 const models = require('./models/models')
 const router = require('./routes/index')
 const fileUpload = require('express-fileupload')
-const port = process.env.DEV_PORT || 8000
+const port = process.env.PORT || process.env.DEV_PORT || 8000
 const path = require('path')
 
 const app = express()
