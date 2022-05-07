@@ -2,6 +2,7 @@ const path = require('path')
 const uuid = require('uuid')
 const fetch = require('node-fetch');
 const { NetCard, Netclasses } = require('../models/models')
+const ApiError = require('../error/ApiError')
 
 class NetCardController {
 		getClasses(id, current, currentNext) {
@@ -43,7 +44,7 @@ class NetCardController {
 
 						return res.json(netCard)
 				}catch(e) {
-						console.log(e)
+						next(ApiError.badRequest(e.message))
 				}
 
 		}
@@ -112,13 +113,14 @@ class NetCardController {
 										week_data,
 										price_dynamics, fee,
 										price, market_cap,
-										price_change_percentage
+										price_change_percentage,
+										img: `${process.env.HOST_URL}/${net.img}`
 								})
 						}
 
 						res.json(handleNets)
 				}catch(e) {
-						res.json(e)
+						next(ApiError.badRequest(e.message))
 				}
 		}
 		async getParams(net) {
