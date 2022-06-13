@@ -30,7 +30,7 @@ class netCardService {
 								price_change_7d, price_change_14d,
 								rank, circulating, token,
 								bonded_ratio,
-								img: `${`https://stakewolle-adminpanel.herokuapp.com${net.attributes.img.data.attributes.url}`}`,
+								img: `${process.env.ADMIN_ROUTE}${net.attributes.img.data[0].attributes.url}`,
 						})
 		  }
 				return handleNets

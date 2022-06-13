@@ -19,7 +19,7 @@ class cardParamsService {
 						week_data = coinArray.reverse()
 				}
 				const fee = round(round(coinArray.reverse()[coinArray.length-1]) - round(coinArray.reverse()[coinArray.length-2]))
-				const price = coinMarketData.current_price
+				let price = coinMarketData.current_price
 				const market_cap = coinMarketData.market_cap
 				const price_change_percentage_24h = coinMarketData.price_change_percentage_24h
 				const price_change_7d = coinMarketData.price_change_percentage_7d_in_currency

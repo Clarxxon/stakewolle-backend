@@ -28,14 +28,17 @@ class NetCardController {
 		// }
 		async getAll(req, res, next) {
 			let {limit, page} = req.query
-			limit = limit || 4;
+			limit = limit || 10;
 			page = page || 1;
-			let offset = page * limit - limit
 			try {
-				const nets = await fetch(`https://stakewolle-adminpanel.herokuapp.com/api/nets-table-plural?pagination[page]=${offset}&pagination[pageSize]=${limit}&populate=*`).then(res => res.json())
+				const nets = await fetch(`${process.env.ADMIN_ROUTE}/api/nets-plural?pagination[page]=${page}&pagination[pageSize]=${limit}&populate=*`).then(res => res.json())
 				const handleNets = await netCardService.getNetCards(nets.data)
-				res.json(handleNets)
+				res.json({
+					nets: handleNets,
+					count: nets.meta.pagination.total
+				})
 			}catch(e) {
+				console.log(e);
 				next(ApiError.badRequest(e.message))
 			}
 		}
