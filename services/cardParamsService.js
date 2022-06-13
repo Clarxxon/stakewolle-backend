@@ -15,8 +15,8 @@ class cardParamsService {
 				const coinMarketData = await fetchMarketData(net.attributes.coin)
 
 				for (let k = coin.prices.length-1; k >= 12; k-=12){
-						coinArray.push(coin.prices[k][1])
-						week_data = coinArray.reverse()
+					coinArray.push(coin.prices[k][1])
+					week_data = coinArray.reverse()
 				}
 				const fee = round(round(coinArray.reverse()[coinArray.length-1]) - round(coinArray.reverse()[coinArray.length-2]))
 				let price = coinMarketData.current_price
