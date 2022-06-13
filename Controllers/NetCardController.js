@@ -31,11 +31,10 @@ class NetCardController {
 			limit = limit || 10;
 			page = page || 1;
 			const url = `${process.env.ADMIN_ROUTE}/api/nets-plural?pagination[page]=${page}&pagination[pageSize]=${limit}&populate=*`
-			console.log(url)
 			try {
 				const nets = await fetch(url).then(res => res.json())
 				const handleNets = await netCardService.getNetCards(nets.data)
-				res.json({
+				await res.json({
 					nets: handleNets,
 					count: nets.meta.pagination.total
 				})
