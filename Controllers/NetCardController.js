@@ -5,27 +5,6 @@ const netCardService = require('../services/netCardService')
 const { fetchIBS, fetchTransactions } = require('../http/QueriesApi')
 
 class NetCardController {
-		// async create(req, res, next) {
-		// 	try {
-		// 		let {
-		// 			coin, title, short_title, subtitle, subtitle_en, token,
-		// 			stakewolle_comission, kepler_link, pingpub_link, adres, cosmostation,
-		// 			bonded_ratio_link,
-		// 		} = req.body
-		// 		const {img} = req.files
-		// 		const filename = uuid.v4() + '.webp'
-		// 		img.mv(path.resolve(__dirname, '..', 'static', filename))
-
-		// 		const netCard = await NetCard.create({
-		// 			coin, title, short_title, subtitle,
-		// 			subtitle_en, token, stakewolle_comission, kepler_link, pingpub_link, adres,
-		// 			bonded_ratio_link, cosmostation,  img: filename
-		// 		})
-		// 		return res.json(netCard)
-		// 	}catch(e) {
-		// 		next(ApiError.badRequest(e.message))
-		// 	}
-		// }
 		async getAll(req, res, next) {
 			let {limit, page} = req.query
 			try {
