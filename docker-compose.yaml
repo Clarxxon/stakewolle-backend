@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin-hej@admin.com
+      PGADMIN_DEFAULT_PASSWORD: bjCBljwrt3j1hjvf23@#%
+    ports:
+      - "5050:80"
+  postgres:
+    container_name: "postgres"
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "habrdb"
+      POSTGRES_USER: "habrpguser"
+      POSTGRES_PASSWORD: "pgpwd4habr"
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+  stakewolle-back:
+    container_name: back
+    build: .
+    environment:
+      DB_NAME: "habrdb"
+      DB_USER: "habrpguser"
+      DB_PASSWORD: "pgpwd4habr"
+      DB_HOST: "postgres"
+      DB_PORT: 5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+  strapi:
+    image: strapi/strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: habrdb
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: habrpguser
+      DATABASE_PASSWORD: pgpwd4habr
+    volumes:
+      - ./app:/srv/app
+    ports:
+      - '1337:1337'
+    depends_on:
+      - postgres
+volumes:
+  pgadmin:
