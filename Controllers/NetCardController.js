@@ -29,7 +29,7 @@ class NetCardController {
 		async getAll(req, res, next) {
 			let {limit, page} = req.query
 			try {
-				limit = limit || 4;
+				limit = limit || 8;
 				page = page || 1;
 				const nets = await fetch(`${process.env.ADMIN_ROUTE}/api/nets-plural?pagination[page]=${page}&pagination[pageSize]=${limit}&populate=*`).then(res => res.json())
 				const handleNets = await netCardService.getNetCards(nets.data)
