@@ -15,4 +15,3 @@ dist
 
 #macOS cache
 .DS_Store
-.env
