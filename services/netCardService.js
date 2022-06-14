@@ -12,7 +12,7 @@ class netCardService {
 							price_change_7d, price_change_14d, rank, circulating, token
 						} = await cardParamsService.getParams(net)
 
-						const url = net.attributes.bonded_ratio_link
+						const url = net.bonded_ratio_link
 						const bondedData = await fetchBondedData(url);
 						const supply = await fetchSupply(url);
 						const inflation = await fetchInflation(url);
@@ -23,14 +23,14 @@ class netCardService {
 						const annual_comission = ((1 / bonded_ratio) * inflation).toFixed(2)
 						handleNets.push({
 								id: net.id,
-								...net.attributes,
+								...net,
 								inflation, annual_comission,
 								week_data, price_dynamics, fee, price,
 								market_cap, price_change_percentage_24h,
 								price_change_7d, price_change_14d,
 								rank, circulating, token,
 								bonded_ratio,
-								img: `${process.env.ADMIN_ROUTE}${net.attributes.img.data[0].attributes.url}`,
+								img: `${process.env.ADMIN_ROUTE}${net.img.url}`,
 						})
 		  }
 				return handleNets
