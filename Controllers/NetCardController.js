@@ -8,7 +8,7 @@ class NetCardController {
 		async getAll(req, res, next) {
 			let {limit, page} = req.query
 			try {
-				limit = limit || 8;
+				limit = limit || 4;
 				page = page || 1;
 				let offset = page * limit - limit
 				const nets = await fetch(`${process.env.ADMIN_ROUTE}/nets?_start=${offset}&_limit=${limit}&_sort=id`).then(res => res.json())
