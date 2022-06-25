@@ -74,7 +74,7 @@ const fetchMarketData = async (coin) => {
 }
 const fetchCoin = async (net) => {
   try {
-    const coin = await fetch(`https://api.coingecko.com/api/v3/coins/${net.attributes.coin}/market_chart?vs_currency=usd&days=1`)
+    const coin = await fetch(`https://api.coingecko.com/api/v3/coins/${net.coin}/market_chart?vs_currency=usd&days=1`)
     .then(res => res.json())
     return coin
   }catch(e) {

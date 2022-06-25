@@ -10,12 +10,10 @@ class NetCardController {
 			try {
 				limit = limit || 8;
 				page = page || 1;
-				const nets = await fetch(`${process.env.ADMIN_ROUTE}/api/nets-plural?pagination[page]=${page}&pagination[pageSize]=${limit}&populate=*`).then(res => res.json())
-				const handleNets = await netCardService.getNetCards(nets.data)
-				await res.json({
-					nets: handleNets,
-					count: nets.meta.pagination.total
-				})
+				let offset = page * limit - limit
+				const nets = await fetch(`${process.env.ADMIN_ROUTE}/nets?_start=${offset}&_limit=${limit}&_sort=id`).then(res => res.json())
+				const handleNets = await netCardService.getNetCards(nets)
+				await res.json(handleNets)
 			}catch(e) {
 				console.log(e);
 				next(ApiError.badRequest(e.message))

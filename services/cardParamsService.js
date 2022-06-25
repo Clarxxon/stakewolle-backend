@@ -12,7 +12,7 @@ class cardParamsService {
 				let price_dynamics = false;
 
 				const coin = await fetchCoin(net)
-				const coinMarketData = await fetchMarketData(net.attributes.coin)
+				const coinMarketData = await fetchMarketData(net.coin)
 
 				for (let k = coin.prices.length-1; k >= 12; k-=12){
 					coinArray.push(coin.prices[k][1])
