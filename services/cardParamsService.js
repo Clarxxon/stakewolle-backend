@@ -27,6 +27,7 @@ class cardParamsService {
 				const rank = coinMarketData.market_cap_rank ? coinMarketData.market_cap_rank : 'N/A'
 				const circulating = coinMarketData.circulating_supply
 				const token = coinMarketData.symbol
+				const img = coinMarketData.image
 				if(price_change_percentage_24h >= 0){
 						price_dynamics = true
 				}
@@ -37,7 +38,7 @@ class cardParamsService {
 
 				return {
 					week_data, price_dynamics, fee, price, market_cap, price_change_percentage_24h,
-					price_change_7d, price_change_14d, rank, circulating, token
+					price_change_7d, price_change_14d, rank, circulating, token, img
 				}
 		}
 }

@@ -6,11 +6,7 @@ class netCardService {
 		async getNetCards(nets) {
 				let handleNets = []
 				for (let net of nets) {
-						const {
-							week_data, price_dynamics, fee, price, market_cap,
-							price_change_percentage_24h,
-							price_change_7d, price_change_14d, rank, circulating, token
-						} = await cardParamsService.getParams(net)
+						const params = await cardParamsService.getParams(net)
 
 						const url = net.bonded_ratio_link
 						const bondedData = await fetchBondedData(url);
@@ -24,13 +20,8 @@ class netCardService {
 						handleNets.push({
 								id: net.id,
 								...net,
-								inflation, annual_comission,
-								week_data, price_dynamics, fee, price,
-								market_cap, price_change_percentage_24h,
-								price_change_7d, price_change_14d,
-								rank, circulating, token,
-								bonded_ratio,
-								img: `${process.env.ADMIN_ROUTE}${net.img.data[0].attributes.url}`,
+								inflation, annual_comission, bonded_ratio,
+								...params,
 						})
 		  }
 				return handleNets
