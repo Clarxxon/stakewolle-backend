@@ -19,6 +19,18 @@ class NetCardController {
 				next(ApiError.badRequest(e.message))
 			}
 		}
+		async getOne(req, res, next) {
+			const { id } = req.params
+			try {
+				let netItem = await fetch(`${process.env.HEROKU_ADMIN_ROUTE}/nets-plural/${id}?populate=*`).then(res => res.json()).then(data => data.data)
+				netItem = { id: netItem.id, ...netItem.attributes }
+				const handleNetItem = await netCardService.getNetCards([netItem])
+				await res.json(handleNetItem)
+			}catch(e) {
+				console.log(e);
+				next(ApiError.badRequest(e.message))
+			}
+		}
 		async getMoreData(req, res, next) {
 			const { id } = req.params
 			const netItem = await fetch(`https://stakewolle-adminpanel.herokuapp.com/api/nets-table-plural/${id}`).then(res => res.json())

@@ -30,7 +30,7 @@ class netCardService {
 								price_change_7d, price_change_14d,
 								rank, circulating, token,
 								bonded_ratio,
-								img: `${process.env.ADMIN_ROUTE}${net.img.url}`,
+								img: `${process.env.ADMIN_ROUTE}${net.img.data[0].attributes.url}`,
 						})
 		  }
 				return handleNets
