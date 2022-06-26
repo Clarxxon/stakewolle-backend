@@ -33,7 +33,7 @@ class NetCardController {
 		}
 		async getMoreData(req, res, next) {
 			const { id } = req.params
-			const netItem = await fetch(`https://stakewolle-adminpanel.herokuapp.com/api/nets-table-plural/${id}`).then(res => res.json())
+			const netItem = await fetch(`https://stakewolle-admin.herokuapp.com/api/nets-plural/${id}`).then(res => res.json())
 			const { ibc_volume, ibc_transfers } = await fetchIBS()
 			const transactions = await fetchTransactions(netItem.data.attributes.mintskan)
 			const result = { ibc_volume, ibc_transfers, transactions }
