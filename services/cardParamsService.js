@@ -8,7 +8,7 @@ function round(number){
 class cardParamsService {
 		async getParams(net) {
 				let coinArray = []
-				let week_data = []
+				let week_data = {}
 				let price_dynamics = false;
 
 				const coin = await fetchCoin(net)
@@ -16,7 +16,7 @@ class cardParamsService {
 
 				for (let k = coin.prices.length-1; k >= 12; k-=12){
 					coinArray.push(coin.prices[k][1])
-					week_data = coinArray.reverse()
+					week_data[k] = coinArray.reverse()[0]
 				}
 				const fee = round(round(coinArray.reverse()[coinArray.length-1]) - round(coinArray.reverse()[coinArray.length-2]))
 				let price = coinMarketData.current_price
@@ -24,7 +24,7 @@ class cardParamsService {
 				const price_change_percentage_24h = coinMarketData.price_change_percentage_24h
 				const price_change_7d = coinMarketData.price_change_percentage_7d_in_currency
 				const price_change_14d = coinMarketData.price_change_percentage_14d_in_currency
-				const rank = coinMarketData.market_cap_rank ? coinMarketData.market_cap_rank : 'N/A'
+				const rank = coinMarketData.market_cap_rank ? `${coinMarketData.market_cap_rank}` : 'N/A'
 				const circulating = coinMarketData.circulating_supply
 				const token = coinMarketData.symbol
 				const img = coinMarketData.image
