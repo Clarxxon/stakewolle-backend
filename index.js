@@ -26,6 +26,7 @@ const start = async () => {
 			app.listen(port, () => console.log(`Started on ${port} port`))
 			setInterval(async () => {
 				await NetCardController.refresh()
+				console.log('Database has been refreshed')
 			}, 2 * 60 * 60 * 1000) // every 2 hours
 		}catch(e) {
 			console.log(e)
