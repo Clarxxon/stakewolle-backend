@@ -81,7 +81,21 @@ const fetchCoin = async (net) => {
     console.log(e)
   }
 }
+const refreshDb = async (item) => {
+  try {
+    const res = await fetch(`${process.env.ADMIN_ROUTE}/nets/${item.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(item)
+    })
+    console.log(await res.json())
+  }catch(e) {
+    console.log(e);
+  }
+}
 
 module.exports = {
-  fetchBondedData, fetchDenom, fetchSupply, fetchInflation, fetchIBS, fetchTransactions, fetchMarketData, fetchCoin
+  fetchBondedData, fetchDenom, fetchSupply, fetchInflation, fetchIBS, fetchTransactions, fetchMarketData, fetchCoin, refreshDb
 }
