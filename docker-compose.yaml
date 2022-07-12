@@ -6,7 +6,7 @@ services:
       depends_on:
         - pgadmin
         - postgres
-        - back
+        - st-back
         - strapi
       volumes:
         - ./reverse_proxy/nginx.conf:/etc/nginx/conf.d/default.conf
@@ -15,7 +15,7 @@ services:
       links:
         - pgadmin
         - postgres
-        - back
+        - st-back
         - strapi
   pgadmin:
     container_name: pgadmin
@@ -37,8 +37,8 @@ services:
       - .:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
-  back:
-    container_name: back
+  st-back:
+    container_name: st-back
     build: .
     environment:
       DB_NAME: "habrdb"
