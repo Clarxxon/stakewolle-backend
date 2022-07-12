@@ -13,12 +13,12 @@ services:
       ports:
         - 80:8080
       links:
-        - pgadmin4_container
+        - pgadmin
         - postgres
         - back
         - strapi
   pgadmin:
-    container_name: pgadmin4_container
+    container_name: pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:
@@ -37,7 +37,7 @@ services:
       - .:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
-  stakewolle-back:
+  back:
     container_name: back
     build: .
     environment:
