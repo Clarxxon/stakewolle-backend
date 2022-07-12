@@ -4,7 +4,7 @@ services:
       image: nginx:latest
       container_name: reverse_proxy
       depends_on:
-        - pgadmin4_container
+        - pgadmin
         - postgres
         - back
         - strapi
