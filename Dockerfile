@@ -15,5 +15,5 @@ RUN npm install
 # копируем исходный код
 COPY . .
 
-EXPOSE 80
+EXPOSE 5000
 CMD [ "node", "index.js" ]
