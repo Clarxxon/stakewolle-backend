@@ -17,6 +17,8 @@ services:
         - postgres
         - st-back
         - strapi
+      networks:
+        - net1
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
@@ -26,6 +28,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: bjCBljwrt3j1hjvf23@#%
     ports:
       - "5050:80"
+    networks:
+      - net1
   postgres:
     container_name: "postgres"
     image: postgres:13.3
@@ -37,6 +41,8 @@ services:
       - .:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+    networks:
+      - net1
   st-back:
     container_name: st-back
     build: .
@@ -50,6 +56,8 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+    networks:
+      - net1
   strapi:
     container_name: strapi
     image: strapi/strapi
@@ -66,5 +74,10 @@ services:
       - '1337:1337'
     depends_on:
       - postgres
+    networks:
+      - net1
 volumes:
   pgadmin:
+networks:
+  net1:
+    driver: bridge
