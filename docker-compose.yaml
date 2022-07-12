@@ -1,5 +1,22 @@
 version: "3.8"
 services:
+  reverse-proxy:
+      image: nginx:latest
+      container_name: reverse_proxy
+      depends_on:
+        - pgadmin4_container
+        - postgres
+        - back
+        - strapi
+      volumes:
+        - ./reverse_proxy/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - 80:8080
+      links:
+        - pgadmin4_container
+        - postgres
+        - back
+        - strapi
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
@@ -34,6 +51,7 @@ services:
     depends_on:
       - postgres
   strapi:
+    container_name: strapi
     image: strapi/strapi
     environment:
       DATABASE_CLIENT: postgres
