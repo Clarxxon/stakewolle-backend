@@ -6,7 +6,7 @@ const router = require('./routes/index')
 const NetCardController = require('./Controllers/NetCardController')
 const fileUpload = require('express-fileupload')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
-const port = process.env.PORT || 80
+const port = process.env.PORT || 8080
 const path = require('path')
 
 const app = express()
