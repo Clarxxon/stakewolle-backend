@@ -68,6 +68,8 @@ services:
       DATABASE_PORT: 5432
       DATABASE_USERNAME: habrpguser
       DATABASE_PASSWORD: pgpwd4habr
+      HOST: strapi
+      NODE_ENV: production
     volumes:
       - ./app:/srv/app
     ports:
